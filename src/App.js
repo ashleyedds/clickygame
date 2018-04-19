@@ -10,7 +10,7 @@ class App extends Component {
     topScore: 0,
     currentScore: 0,
     pokemon: pokemon,
-    unclicked: []
+    clicked: []
   }
 
   randomize = array => {
@@ -21,23 +21,23 @@ class App extends Component {
   }
 
   catchIt = type => {
-    const catchPokemon = this.state.unclicked.indexOf(type);
+    const catchPokemon = this.state.clicked.indexOf(type);
     console.log(catchPokemon);
     if (catchPokemon !== -1) {
       this.setState({
         topScore: (this.state.currentScore > this.state.topScore) ? this.state.currentScore : this.state.topScore,
         currentScore: 0,
         pokemon: pokemon,
-        unclicked: []
+        clicked: []
       });
     }
     else {
-      const uncaughtPokemon = type;
-      console.log(uncaughtPokemon);
+      const caughtPokemon = type;
+      console.log(caughtPokemon);
       this.setState({
         currentScore: this.state.currentScore + 1,
         pokemon: pokemon,
-        unclicked: this.state.unclicked.concat(type)
+        clicked: this.state.clicked.concat(type)
       });
     }
     this.randomize(pokemon);
