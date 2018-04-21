@@ -23,27 +23,38 @@ class App extends Component {
 
   catchIt = type => {
     const catchPokemon = this.state.clicked.indexOf(type);
-    console.log(catchPokemon);
-    if (catchPokemon !== -1) {
+    const playerCurrentScore = this.state.currentScore;
+    console.log(playerCurrentScore);
+    if (playerCurrentScore === 11) {
+      this.setState({
+        topScore: 12,
+        currentScore: 0,
+        pokemon: pokemon,
+        message: "Congrats! You caught them all!",
+        clicked: []
+      })
+    }
+    else if (catchPokemon !== -1) {
       this.setState({
         topScore: (this.state.currentScore > this.state.topScore) ? this.state.currentScore : this.state.topScore,
         currentScore: 0,
         pokemon: pokemon,
-        message: "You guessed incorrectly! Too bad :(",
+        message: "You already caught that one! Too bad :(",
         clicked: []
       });
     }
     else {
       const caughtPokemon = type;
       console.log(caughtPokemon);
-      this.setState({
-        currentScore: this.state.currentScore + 1,
-        pokemon: pokemon,
-        message: "You guessed correctly!",
-        clicked: this.state.clicked.concat(type)
-      });
-    }
+        this.setState({
+          currentScore: this.state.currentScore + 1,
+          pokemon: pokemon,
+          message: "You guessed correctly!",
+          clicked: this.state.clicked.concat(type)
+        });
+      }
     this.randomize(pokemon);
+    console.log(this.state.currentScore);
   }
 
   render() {
@@ -53,7 +64,7 @@ class App extends Component {
           message={this.state.message}
           currentScore={this.state.currentScore}
           topScore={this.state.topScore}
-          />
+        />
         <Title />
         {
           this.state.pokemon.map(pokemon => (
@@ -61,7 +72,8 @@ class App extends Component {
               type={pokemon.type}
               image={pokemon.image}
               catchIt={this.catchIt}
-              />
+              score={this.currentScore}
+            />
           ))
         }
       </Wrapper>
