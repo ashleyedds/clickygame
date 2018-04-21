@@ -25,3 +25,9 @@
     margin-right: 5%;
     margin-top: 1%;
 }
+
+.message {
+    position: absolute;
+    left: 43%;
+    margin-top: 1%;
+}

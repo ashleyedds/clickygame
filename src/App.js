@@ -9,6 +9,7 @@ class App extends Component {
   state = {
     topScore: 0,
     currentScore: 0,
+    message: "Click one to begin!",
     pokemon: pokemon,
     clicked: []
   }
@@ -28,6 +29,7 @@ class App extends Component {
         topScore: (this.state.currentScore > this.state.topScore) ? this.state.currentScore : this.state.topScore,
         currentScore: 0,
         pokemon: pokemon,
+        message: "You guessed incorrectly! Too bad :(",
         clicked: []
       });
     }
@@ -37,6 +39,7 @@ class App extends Component {
       this.setState({
         currentScore: this.state.currentScore + 1,
         pokemon: pokemon,
+        message: "You guessed correctly!",
         clicked: this.state.clicked.concat(type)
       });
     }
@@ -47,6 +50,7 @@ class App extends Component {
     return (
       <Wrapper>
         <NavBar
+          message={this.state.message}
           currentScore={this.state.currentScore}
           topScore={this.state.topScore}
           />
